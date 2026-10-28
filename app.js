@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const qrCountdown = document.getElementById('qrCountdown');
   const refreshQrBtn = document.getElementById('refreshQrBtn');
 
-  // --- STORE LIST DATA (100% REPLICA Store List.jpg & Store List - Expand.jpg) ---
+  // --- STORE LIST DATA (Chỉ hiển thị chương trình Tích Tem Đổi Quà - Hộp Quà Happy Fridge) ---
   const storeListData = {
     south: [
       {
@@ -264,47 +264,18 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Hộp quà đặc biệt tích hợp các sản phẩm độc quyền GS25',
         bgClass: 'gift-box-bg',
         icon: 'fa-solid fa-box-archive',
-        stock: 'Còn 1.000 cái',
+        stock: 'Quà tặng chiến dịch',
         stores: [
-          { name: 'GS25 240 Bùi Viện', addr: '240 Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, TP. Hồ Chí Minh', stock: 'Còn 100 cái' },
-          { name: 'GS25 Trần Nhật Duật, Q.1', addr: '32 Trần Nhật Duật, Phường Tân Định, Quận 1, TP. Hồ Chí Minh', stock: 'Còn 20 cái' },
-          { name: 'GS25 Landmark 81, Bình Thạnh', addr: 'Tầng B1, Vinhomes Central Park, Quận Bình Thạnh, TP. Hồ Chí Minh', stock: 'Còn 50 cái' },
-          { name: 'GS25 Thảo Điền, TP. Thủ Đức', addr: '12 Quốc Hương, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh', stock: 'Còn 80 cái' },
-          { name: 'GS25 Phan Xích Long, Phú Nhuận', addr: '158 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh', stock: 'Còn 45 cái' },
-          { name: 'GS25 Sư Vạn Hạnh, Q.10', addr: '824 Sư Vạn Hạnh, Phường 12, Quận 10, TP. Hồ Chí Minh', stock: 'Còn 60 cái' },
-          { name: 'GS25 Nguyễn Thị Minh Khai, Q.3', addr: '18B Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1, TP. Hồ Chí Minh', stock: 'Còn 75 cái' },
-          { name: 'GS25 Võ Văn Ngân, TP. Thủ Đức', addr: '216 Võ Văn Ngân, Phường Bình Thọ, TP. Thủ Đức, TP. Hồ Chí Minh', stock: 'Còn 90 cái' },
-          { name: 'GS25 Hoàng Hoa Thám, Tân Bình', addr: '34 Hoàng Hoa Thám, Phường 12, Quận Tân Bình, TP. Hồ Chí Minh', stock: 'Còn 30 cái' },
-          { name: 'GS25 Phạm Văn Đồng, Gò Vấp', addr: '412 Phạm Văn Đồng, Phường 11, Quận Gò Vấp, TP. Hồ Chí Minh', stock: 'Còn 55 cái' }
-        ]
-      },
-      {
-        id: 'sg_south_2',
-        title: 'Bình "Giữ Nhiệt" Happy Fridge Youus',
-        desc: 'Bình nước inox cao cấp 500ml giữ nóng lạnh 24h',
-        bgClass: 'tumbler-bg',
-        icon: 'fa-solid fa-bottle-water',
-        stock: 'Còn 500 cái',
-        stores: [
-          { name: 'GS25 240 Bùi Viện', addr: '240 Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, TP. Hồ Chí Minh', stock: 'Còn 60 cái' },
-          { name: 'GS25 Landmark 81, Bình Thạnh', addr: 'Tầng B1, Vinhomes Central Park, Quận Bình Thạnh, TP. Hồ Chí Minh', stock: 'Còn 40 cái' },
-          { name: 'GS25 Thảo Điền, TP. Thủ Đức', addr: '12 Quốc Hương, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh', stock: 'Còn 50 cái' },
-          { name: 'GS25 Sư Vạn Hạnh, Q.10', addr: '824 Sư Vạn Hạnh, Phường 12, Quận 10, TP. Hồ Chí Minh', stock: 'Còn 35 cái' },
-          { name: 'GS25 Phan Xích Long, Phú Nhuận', addr: '158 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh', stock: 'Còn 30 cái' }
-        ]
-      },
-      {
-        id: 'sg_south_3',
-        title: 'Túi Tote Canvas: Hoà Bình Đẹp Lắm',
-        desc: 'Túi vải canvas thời trang phiên bản kỉ niệm GS25',
-        bgClass: 'tote-bg',
-        icon: 'fa-solid fa-bag-shopping',
-        stock: 'Còn 300 cái',
-        stores: [
-          { name: 'GS25 240 Bùi Viện', addr: '240 Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, TP. Hồ Chí Minh', stock: 'Còn 40 cái' },
-          { name: 'GS25 Trần Nhật Duật, Q.1', addr: '32 Trần Nhật Duật, Phường Tân Định, Quận 1, TP. Hồ Chí Minh', stock: 'Còn 25 cái' },
-          { name: 'GS25 Landmark 81, Bình Thạnh', addr: 'Tầng B1, Vinhomes Central Park, Quận Bình Thạnh, TP. Hồ Chí Minh', stock: 'Còn 30 cái' },
-          { name: 'GS25 Thảo Điền, TP. Thủ Đức', addr: '12 Quốc Hương, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh', stock: 'Còn 35 cái' }
+          { name: 'GS25 240 Bùi Viện', addr: '240 Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, TP. Hồ Chí Minh' },
+          { name: 'GS25 Trần Nhật Duật, Q.1', addr: '32 Trần Nhật Duật, Phường Tân Định, Quận 1, TP. Hồ Chí Minh' },
+          { name: 'GS25 Landmark 81, Bình Thạnh', addr: 'Tầng B1, Vinhomes Central Park, Quận Bình Thạnh, TP. Hồ Chí Minh' },
+          { name: 'GS25 Thảo Điền, TP. Thủ Đức', addr: '12 Quốc Hương, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh' },
+          { name: 'GS25 Phan Xích Long, Phú Nhuận', addr: '158 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh' },
+          { name: 'GS25 Sư Vạn Hạnh, Q.10', addr: '824 Sư Vạn Hạnh, Phường 12, Quận 10, TP. Hồ Chí Minh' },
+          { name: 'GS25 Nguyễn Thị Minh Khai, Q.3', addr: '18B Nguyễn Thị Minh Khai, Phường Đa Kao, Quận 1, TP. Hồ Chí Minh' },
+          { name: 'GS25 Võ Văn Ngân, TP. Thủ Đức', addr: '216 Võ Văn Ngân, Phường Bình Thọ, TP. Thủ Đức, TP. Hồ Chí Minh' },
+          { name: 'GS25 Hoàng Hoa Thám, Tân Bình', addr: '34 Hoàng Hoa Thám, Phường 12, Quận Tân Bình, TP. Hồ Chí Minh' },
+          { name: 'GS25 Phạm Văn Đồng, Gò Vấp', addr: '412 Phạm Văn Đồng, Phường 11, Quận Gò Vấp, TP. Hồ Chí Minh' }
         ]
       }
     ],
@@ -315,42 +286,15 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Hộp quà phiên bản giới hạn Miền Bắc độc quyền GS25',
         bgClass: 'gift-box-bg',
         icon: 'fa-solid fa-box-archive',
-        stock: 'Còn 650 cái',
+        stock: 'Quà tặng chiến dịch',
         stores: [
-          { name: 'GS25 36 Tràng Tiền, Hoàn Kiếm', addr: '36 Tràng Tiền, Quận Hoàn Kiếm, TP. Hà Nội', stock: 'Còn 120 cái' },
-          { name: 'GS25 Vincom Bà Triệu, Hai Bà Trưng', addr: '191 Bà Triệu, Phường Lê Đại Hành, Quận Hai Bà Trưng, TP. Hà Nội', stock: 'Còn 90 cái' },
-          { name: 'GS25 Cầu Giấy, Hà Nội', addr: '165 Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, TP. Hà Nội', stock: 'Còn 85 cái' },
-          { name: 'GS25 Tây Hồ, Hà Nội', addr: '52 Tô Ngọc Vân, Phường Quảng An, Quận Tây Hồ, TP. Hà Nội', stock: 'Còn 110 cái' },
-          { name: 'GS25 Royal City, Thanh Xuân', addr: 'Tầng B2, 72A Nguyễn Trãi, Quận Thanh Xuân, TP. Hà Nội', stock: 'Còn 70 cái' },
-          { name: 'GS25 Time City, Hai Bà Trưng', addr: '458 Minh Khai, Phường Vĩnh Tuy, Quận Hai Bà Trưng, TP. Hà Nội', stock: 'Còn 95 cái' },
-          { name: 'GS25 Mỹ Đình, Nam Từ Liêm', addr: '2 Lê Đức Thọ, Phường Mỹ Đình 2, Quận Nam Từ Liêm, TP. Hà Nội', stock: 'Còn 80 cái' }
-        ]
-      },
-      {
-        id: 'sg_north_2',
-        title: 'Móc Khóa Yêu Nước GS25 Special Edition',
-        desc: 'Móc khóa kim loại cao cấp phong cách Hà Nội',
-        bgClass: 'tote-bg',
-        icon: 'fa-solid fa-key',
-        stock: 'Còn 400 cái',
-        stores: [
-          { name: 'GS25 36 Tràng Tiền, Hoàn Kiếm', addr: '36 Tràng Tiền, Quận Hoàn Kiếm, TP. Hà Nội', stock: 'Còn 80 cái' },
-          { name: 'GS25 Vincom Bà Triệu, Hai Bà Trưng', addr: '191 Bà Triệu, Quận Hai Bà Trưng, TP. Hà Nội', stock: 'Còn 60 cái' },
-          { name: 'GS25 Tây Hồ, Hà Nội', addr: '52 Tô Ngọc Vân, Quận Tây Hồ, TP. Hà Nội', stock: 'Còn 75 cái' },
-          { name: 'GS25 Cầu Giấy, Hà Nội', addr: '165 Cầu Giấy, Quận Cầu Giấy, TP. Hà Nội', stock: 'Còn 50 cái' }
-        ]
-      },
-      {
-        id: 'sg_north_3',
-        title: 'Bình Giữ Lạnh Youus Polar Bear',
-        desc: 'Bình giữ nhiệt Youus in hình chú gấu Bắc Cực xinh xắn',
-        bgClass: 'tumbler-bg',
-        icon: 'fa-solid fa-bottle-water',
-        stock: 'Còn 250 cái',
-        stores: [
-          { name: 'GS25 36 Tràng Tiền, Hoàn Kiếm', addr: '36 Tràng Tiền, Quận Hoàn Kiếm, TP. Hà Nội', stock: 'Còn 50 cái' },
-          { name: 'GS25 Tây Hồ, Hà Nội', addr: '52 Tô Ngọc Vân, Quận Tây Hồ, TP. Hà Nội', stock: 'Còn 45 cái' },
-          { name: 'GS25 Vincom Bà Triệu, Hai Bà Trưng', addr: '191 Bà Triệu, Quận Hai Bà Trưng, TP. Hà Nội', stock: 'Còn 35 cái' }
+          { name: 'GS25 36 Tràng Tiền, Hoàn Kiếm', addr: '36 Tràng Tiền, Quận Hoàn Kiếm, TP. Hà Nội' },
+          { name: 'GS25 Vincom Bà Triệu, Hai Bà Trưng', addr: '191 Bà Triệu, Phường Lê Đại Hành, Quận Hai Bà Trưng, TP. Hà Nội' },
+          { name: 'GS25 Cầu Giấy, Hà Nội', addr: '165 Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, TP. Hà Nội' },
+          { name: 'GS25 Tây Hồ, Hà Nội', addr: '52 Tô Ngọc Vân, Phường Quảng An, Quận Tây Hồ, TP. Hà Nội' },
+          { name: 'GS25 Royal City, Thanh Xuân', addr: 'Tầng B2, 72A Nguyễn Trãi, Quận Thanh Xuân, TP. Hà Nội' },
+          { name: 'GS25 Time City, Hai Bà Trưng', addr: '458 Minh Khai, Phường Vĩnh Tuy, Quận Hai Bà Trưng, TP. Hà Nội' },
+          { name: 'GS25 Mỹ Đình, Nam Từ Liêm', addr: '2 Lê Đức Thọ, Phường Mỹ Đình 2, Quận Nam Từ Liêm, TP. Hà Nội' }
         ]
       }
     ]
@@ -727,14 +671,13 @@ document.addEventListener('DOMContentLoaded', () => {
         storeItem.className = 'sg-store-item';
         storeItem.innerHTML = `
           <div class="sg-store-name-col">
-            <strong class="sg-store-name">${st.name}</strong>
-            <span class="sg-store-addr-short">${st.addr}</span>
+            <strong class="sg-store-name"><i class="fa-solid fa-store" style="color: #0284c7; font-size: 11px;"></i> ${st.name}</strong>
+            <span class="sg-store-addr-short"><i class="fa-solid fa-location-dot" style="color: #94a3b8; font-size: 10px;"></i> ${st.addr}</span>
           </div>
           <div class="sg-store-action-col">
-            <span class="sg-store-qty-pill">${st.stock}</span>
-            <a class="sg-view-map-link" href="javascript:void(0)" title="Xem bản đồ">
+            <button type="button" class="sg-view-map-link" title="Xem trên bản đồ">
               <i class="fa-solid fa-map-location-dot"></i> Xem bản đồ
-            </a>
+            </button>
           </div>
         `;
 
@@ -742,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapLink = storeItem.querySelector('.sg-view-map-link');
         mapLink.addEventListener('click', (e) => {
           e.stopPropagation();
-          openStoreMapModal(st.name, st.addr, st.stock);
+          openStoreMapModal(st.name, st.addr);
         });
 
         storesDrawer.appendChild(storeItem);
@@ -767,10 +710,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- MỞ MODAL XEM BẢN ĐỒ CỬA HÀNG GS25 ---
-  function openStoreMapModal(name, address, stock) {
+  function openStoreMapModal(name, address) {
     if (mapModalStoreName) mapModalStoreName.textContent = name;
     if (mapModalAddress) mapModalAddress.textContent = address;
-    if (mapModalStock) mapModalStock.innerHTML = `<i class="fa-solid fa-box"></i> ${stock}`;
     openModal(storeMapModal);
   }
 
@@ -1181,7 +1123,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (storeListHelpBtn) {
       storeListHelpBtn.addEventListener('click', () => {
-        showToast('Chọn Miền Nam hoặc Miền Bắc để kiểm tra số lượng quà còn tại từng cửa hàng!');
+        showToast('Chọn Miền Nam hoặc Miền Bắc để xem danh sách cửa hàng đổi quà!');
+      });
+    }
+
+    // Navigation: Mở trang T&C chương trình Tích Tem Đổi Quà
+    const openStampTermsBtn = document.getElementById('openStampTermsBtn');
+    const backToStampFromTerms = document.getElementById('backToStampFromTerms');
+    const btnTermsReturn = document.getElementById('btnTermsReturn');
+    const termsShareBtn = document.getElementById('termsShareBtn');
+    const stampHelpBtn = document.getElementById('stampHelpBtn');
+
+    if (openStampTermsBtn) {
+      openStampTermsBtn.addEventListener('click', () => {
+        navigateToPage('stamp-terms-page');
+      });
+    }
+
+    if (stampHelpBtn) {
+      stampHelpBtn.addEventListener('click', () => {
+        navigateToPage('stamp-terms-page');
+      });
+    }
+
+    if (backToStampFromTerms) {
+      backToStampFromTerms.addEventListener('click', () => {
+        navigateToPage('stamp-game');
+      });
+    }
+
+    if (btnTermsReturn) {
+      btnTermsReturn.addEventListener('click', () => {
+        navigateToPage('stamp-game');
+      });
+    }
+
+    if (termsShareBtn) {
+      termsShareBtn.addEventListener('click', () => {
+        showToast('Đã sao chép liên kết Thể lệ & T&C chương trình!');
       });
     }
 
