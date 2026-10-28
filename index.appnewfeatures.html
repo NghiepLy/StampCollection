@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GS25 Loyalty App & CRM Webviews Simulator</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Controller Bar for BA / PM Review -->
+  <header class="dev-control-bar">
+    <div class="brand">
+      <span class="gs25-logo">GS<span>25</span></span>
+      <span class="dev-title">CRM Loyalty Simulator (100% GS25 UI)</span>
+    </div>
+    <div class="webview-switcher">
+      <button class="switch-btn active" data-target="home-screen"><i class="fa-solid fa-house"></i> GS25 Home</button>
+      <button class="switch-btn" data-target="stamp-game"><i class="fa-solid fa-stamp"></i> Game Tem</button>
+      <button class="switch-btn" data-target="egift-card"><i class="fa-solid fa-gift"></i> E-Gift Card</button>
+      <button class="switch-btn fridge-toggle-btn" data-target="tu-lanh"><i class="fa-solid fa-box-archive"></i> Tủ Lạnh 25 <span class="badge" id="fridgeBadgeCount">6</span></button>
+    </div>
+    <!-- Quick Simulation Tools for Reviewers -->
+    <div class="dev-sim-tools">
+      <span class="sim-tools-label"><i class="fa-solid fa-vial"></i> Test Tem:</span>
+      <button class="dev-sim-btn" id="simResetStampsBtn" title="Đặt lại 0 tem"><i class="fa-solid fa-rotate-left"></i> 0</button>
+      <button class="dev-sim-btn" id="simQuickAdd1Btn" title="Cộng nhanh 1 tem">+1</button>
+      <button class="dev-sim-btn" id="simQuickAdd5Btn" title="Cộng nhanh 5 tem">+5</button>
+      <button class="dev-sim-btn" id="simQuickAdd10Btn" title="Cộng nhanh 10 tem">+10</button>
+      <button class="dev-sim-btn" id="simQuickAdd12Btn" title="Cộng 12 tem để test vượt mốc 10 tem">+12</button>
+    </div>
+  </header>
+
+  <!-- Main Viewport Container -->
+  <main class="app-viewport-container">
+
+    <!-- MOBILE FRAME SHELL SIMULATOR -->
+    <div class="mobile-frame" id="mobileFrameShell">
+
+      <!-- Mobile Status Bar (iOS Style) -->
+      <div class="mobile-status-bar">
+        <span class="time">1:47</span>
+        <div class="notch"></div>
+        <div class="icons">
+          <i class="fa-solid fa-signal"></i>
+          <i class="fa-solid fa-wifi"></i>
+          <i class="fa-solid fa-battery-full"></i>
+        </div>
+      </div>
+
+      <!-- VIEW 1: GS25 APP HOME SCREEN (Full replica of 2.0.0 Home.jpg & 10.0.0 Floating Button.jpg) -->
+      <section id="home-screen" class="app-page active">
+        <!-- GS25 App Home Top Nav Bar -->
+        <div class="home-top-nav">
+          <div class="user-greeting-box">
+            <span class="gs25-brand-logo">GS<span>25</span></span>
+            <div class="greeting-text">
+              <span class="hello-label">Chào buổi xế chiều 👋</span>
+              <strong class="user-name">Huy Nguyễn</strong>
+            </div>
+          </div>
+          <button class="noti-bell-btn" id="simNotiBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="noti-badge">2</span>
+          </button>
+        </div>
+
+        <div class="home-scroll-content">
+          <!-- Member Points Card (100% replica of 2.0.0 Home.jpg) -->
+          <div class="home-points-card">
+            <div class="points-card-left">
+              <div class="tier-pill standard-tier">
+                <i class="fa-solid fa-moon"></i> Standard
+              </div>
+              <div class="points-amount-row">
+                <span class="pts-val">9.500</span>
+                <span class="pts-unit">điểm</span>
+              </div>
+              <a class="points-equiv-link" id="viewPointsDetailBtn">Tương đương <strong>950.000đ</strong> <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            <div class="points-card-right" id="homeOpenQrBtn" title="Nhấp để mở mã QR quét tại quầy POS">
+              <div class="home-qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=GS25MEMBER-8901459201948821" alt="Mã QR Thành Viên" class="home-qr-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons Grid (3 Cards: MY DEALS, MY REWARDS, MY CARDS - 2.0.0 Home (1).jpg) -->
+          <div class="quick-actions-3col">
+            <div class="action-card-v2 deals-v2" id="quickDealsBtn">
+              <div class="action-icon-square green-sq">
+                <i class="fa-solid fa-percent"></i>
+              </div>
+              <span class="action-label-v2 label-green">MY DEALS</span>
+            </div>
+            <div class="action-card-v2 rewards-v2" id="quickRewardsBtn">
+              <div class="action-icon-square blue-sq">
+                <i class="fa-solid fa-ticket"></i>
+              </div>
+              <span class="action-label-v2 label-blue">MY REWARDS</span>
+            </div>
+            <div class="action-card-v2 cards-v2" id="quickCardsBtn">
+              <div class="action-icon-square pink-sq">
+                <i class="fa-solid fa-credit-card"></i>
+              </div>
+              <span class="action-label-v2 label-pink">MY CARDS</span>
+            </div>
+          </div>
+
+          <!-- Section: Ưu đãi đỉnh cao (Horizontal Deals Scroll - 2.0.0 Home.jpg) -->
+          <div class="home-section-header">
+            <h3>Ưu đãi đỉnh cao</h3>
+            <a class="see-all-link" id="seeAllDealsBtn">Xem tất cả</a>
+          </div>
+          <div class="deals-horizontal-scroll">
+            <div class="deal-card-gs" data-deal="Kem Merino - Mua 2 tặng 1 cùng loại">
+              <div class="deal-poster-box">
+                <div class="poster-tag-sub">LIFESTYLE PLATFORM • GS25</div>
+                <div class="deal-poster-visual green-gradient">
+                  <span class="deal-main-title">bữa xế<br>chill</span>
+                  <div class="deal-promo-badge">mua 2<br>tặng 1 <span>KEM MERINO CÙNG LOẠI</span></div>
+                </div>
+              </div>
+              <div class="deal-info-body">
+                <div class="deal-date-pill">12/6 - 30/6/25</div>
+                <div class="deal-card-title">Kem Merino - Mua 2 tặng 1 cùng loại</div>
+              </div>
+            </div>
+
+            <div class="deal-card-gs" data-deal="Mua 2 lon CocaCola - Tặng 1 lon CocaCola">
+              <div class="deal-poster-box">
+                <div class="deal-poster-visual red-gradient">
+                  <span class="deal-main-title">săn Coca<br>cùng Bạn</span>
+                  <div class="deal-promo-badge">nhận quà <span>COOL</span></div>
+                </div>
+              </div>
+              <div class="deal-info-body">
+                <div class="deal-date-pill">12/6 - 30/6/25</div>
+                <div class="deal-card-title">Mua 2 lon CocaCola - Tặng 1 lon CocaCola</div>
+              </div>
+            </div>
+
+            <div class="deal-card-gs" data-deal="Mua 2 tặng 1 rong biển MITU">
+              <div class="deal-poster-box">
+                <div class="deal-poster-visual blue-gradient">
+                  <span class="deal-main-title">DEAL ĐỦ<br>DEADLINE</span>
+                  <div class="deal-promo-badge">MUA 2 TẶNG 1 <span>RONG BIỂN MITU</span></div>
+                </div>
+              </div>
+              <div class="deal-info-body">
+                <div class="deal-date-pill">12/6 - 30/6/25</div>
+                <div class="deal-card-title">Mua 2 tặng 1 rong biển MITU</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Có điểm là có quà (Horizontal Rewards Scroll - 2.0.0 Home.jpg) -->
+          <div class="home-section-header">
+            <h3>Có điểm là có quà</h3>
+            <a class="see-all-link" id="seeAllRewardsBtn">Xem tất cả</a>
+          </div>
+          <div class="rewards-horizontal-scroll">
+            <div class="reward-card-gs" data-reward="Tặng 2 chai TH True Tea trị giá 30.000 VND" data-pts="400">
+              <div class="reward-poster-box tea-bg-visual">
+                <div class="poster-tag-sub">LIFESTYLE PLATFORM • GS25</div>
+                <div class="reward-title-banner">TRÀ CHILL</div>
+                <span class="poster-promo-pill">MUA 2 TẶNG 1</span>
+              </div>
+              <div class="reward-info-body">
+                <div class="reward-date-pill">Hạn đổi 30/6/25</div>
+                <div class="reward-card-title">Tặng 2 chai TH True Tea trị giá 30.000 VND</div>
+                <div class="reward-point-pill"><i class="fa-solid fa-sun icon-star-gold"></i> <strong>400</strong> điểm</div>
+                <button class="reward-action-btn primary-btn">Đổi ngay</button>
+              </div>
+            </div>
+
+            <div class="reward-card-gs" data-reward="Tặng liền 2 lon bia bất kì nhấm nhi cùng nhau" data-pts="1500">
+              <div class="reward-poster-box beer-bg-visual">
+                <div class="reward-title-banner">CỨ CHILL THÔI</div>
+                <span class="poster-promo-pill">MUA 3 TẶNG 1</span>
+              </div>
+              <div class="reward-info-body">
+                <div class="reward-date-pill">Hạn đổi 30/6/25</div>
+                <div class="reward-card-title">Tặng liền 2 lon bia bất kì nhấm nhi cùng nhau</div>
+                <div class="reward-point-pill"><i class="fa-solid fa-sun icon-star-gold"></i> <strong>1.500</strong> điểm</div>
+                <button class="reward-action-btn secondary-btn">Đổi ngay</button>
+              </div>
+            </div>
+
+            <div class="reward-card-gs" data-reward="Tặng 1 suất mì ý trị giá 50.000đ" data-pts="5000">
+              <div class="reward-poster-box food-bg-visual">
+                <div class="reward-title-banner">BỮA SÁNG NGON</div>
+                <span class="poster-promo-pill">TẶNG MÌ Ý</span>
+              </div>
+              <div class="reward-info-body">
+                <div class="reward-date-pill">Hạn đổi 30/6/25</div>
+                <div class="reward-card-title">Tặng 1 phần mì ý trị giá 50.000đ</div>
+                <div class="reward-point-pill"><i class="fa-solid fa-sun icon-star-gold"></i> <strong>5.000</strong> điểm</div>
+                <button class="reward-action-btn primary-btn">Đổi ngay</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Chơi nữa chơi mãi (Game Arcade Banner - 2.0.0 Home.jpg) -->
+          <div class="home-section-header">
+            <h3>Chơi nữa chơi mãi</h3>
+            <a class="see-all-link">Xem tất cả</a>
+          </div>
+          <div class="game-arcade-banner" id="openStampGameCard">
+            <div class="arcade-content">
+              <div class="arcade-badge">NEW STAMP GAME</div>
+              <h2 class="arcade-title">Tích tem<br><span>CHƠI GAME</span></h2>
+              <p class="arcade-sub">Tích đủ 10 tem đổi Hộp Quà Happy Fridge Đặc Biệt!</p>
+              <button class="arcade-play-btn">Chơi ngay <i class="fa-solid fa-play"></i></button>
+            </div>
+          </div>
+
+          <!-- Section: Tủ Lạnh 25 (100% replica of 2.0.0 Home.jpg Tủ Lạnh Widget) -->
+          <div class="home-tulanh-widget" id="homeTuLanhBanner">
+            <div class="tulanh-header-bar">
+              <div class="tl-bubble-logo">
+                <span class="tl-text">Tủ Lạnh</span>
+                <span class="tl-num">25</span>
+              </div>
+              <div class="tl-slogan-col">
+                <strong>GIỮ YÊU THƯƠNG</strong>
+                <strong>TRAO TIỆN LỢI</strong>
+              </div>
+              <i class="fa-solid fa-arrow-right tl-arrow-icon" id="storageSeeAllBtn"></i>
+            </div>
+            
+            <div class="tulanh-preview-card">
+              <div class="tl-card-img-box">
+                <i class="fa-solid fa-bottle-water"></i>
+              </div>
+              <div class="tl-card-info">
+                <div class="tl-exp-pill">Hạn đổi 30/6/25</div>
+                <h4 class="tl-item-title">Trà Xanh Youus Boseong Green Tea Iced Tea 340ml</h4>
+                <div class="tl-bottom-row">
+                  <span class="tl-qty-pill"><i class="fa-solid fa-circle"></i> 2 chai</span>
+                  <button class="tl-use-btn" id="storageUseBtn">Sử dụng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW 3: WEBVIEW 1 - STAMP COLLECTION GAME -->
+      <section id="stamp-game" class="app-page">
+        <!-- Webview Nav Header -->
+        <div class="webview-header-nav">
+          <button class="back-home-btn" id="backToHomeFromStamp"><i class="fa-solid fa-chevron-left"></i> Trang chủ</button>
+          <span class="wv-title">GS25 Stamp Program</span>
+          <button class="icon-btn-sm" id="stampHelpBtn"><i class="fa-regular fa-circle-question"></i></button>
+        </div>
+
+        <div class="webview-scroll-content">
+          <!-- Compact Campaign Banner -->
+          <div class="stamp-hero-card">
+            <div class="hero-header-row">
+              <div class="stamp-logo-badge">
+                <i class="fa-solid fa-award"></i> GS25 STAMP PROGRAM
+              </div>
+              <div class="timer-tag"><i class="fa-regular fa-clock"></i> Tháng <span id="stampDaysLeft">08/2026</span></div>
+            </div>
+            <h2>TÍCH TEM ĐỔI QUÀ</h2>
+            <p class="subtitle">Tích tem tự động khi mua sắm tại GS25 để nhận phần thưởng hấp dẫn mỗi tháng!</p>
+          </div>
+
+          <!-- 1. PHẦN CÁCH TÍCH TEM (TƯƠNG TÁC THỎA 2 ĐIỀU KIỆN ĐỂ TÍCH TEM) -->
+          <div class="mkt-card get-stamps-card full-width-card clean-rule-card">
+            <div class="mkt-card-header blue-hdr">
+              <div class="hdr-left-title">
+                <i class="fa-solid fa-bullseye"></i> CÁCH TÍCH TEM
+              </div>
+              <span class="hdr-tag-pill"><i class="fa-solid fa-circle-check"></i> THỎA 2 ĐIỀU KIỆN</span>
+            </div>
+            <div class="mkt-card-body">
+              <div class="stamp-interactive-section">
+                <!-- Condition 1 Check Card -->
+                <div class="condition-toggle-card" id="condBillCard">
+                  <div class="cond-checkbox" id="condBillCheck">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <div class="cond-content">
+                    <span class="cond-badge">ĐIỀU KIỆN 1</span>
+                    <strong>Hóa đơn giao dịch từ 100.000đ trở lên</strong>
+                  </div>
+                </div>
+
+                <!-- Condition 2 Check Card -->
+                <div class="condition-toggle-card" id="condSponsorCard">
+                  <div class="cond-checkbox" id="condSponsorCheck">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <div class="cond-content">
+                    <span class="cond-badge orange">ĐIỀU KIỆN 2</span>
+                    <strong>Có ít nhất 01 sản phẩm của Nhà tài trợ</strong>
+                  </div>
+                </div>
+
+                <!-- Action Button to Earn Stamp -->
+                <button class="btn-earn-stamp" id="btnEarnStamp" disabled>
+                  <i class="fa-solid fa-stamp"></i> TÍCH 01 TEM
+                </button>
+                <div class="earn-stamp-hint" id="earnStampHint">
+                  <i class="fa-solid fa-circle-info"></i> Bấm chọn đủ 2 điều kiện trên để mở nút Tích 01 Tem
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. PHẦN BẢNG TÍCH TEM -->
+          <div class="stamp-board-container clean-board">
+            <!-- Mục hiển thị Tổng số lượng TEM mà member đang có: 1 SỐ TỔNG THẬT TO THÔI -->
+            <div class="user-stamp-total-card-clean">
+              <span class="total-title-clean"><i class="fa-solid fa-wallet"></i> TỔNG SỐ LƯỢNG TEM ĐANG CÓ</span>
+              <div class="huge-number-wrapper">
+                <span class="huge-stamp-number" id="userTotalStampsDisplay">10</span>
+                <span class="huge-unit-label">TEM</span>
+              </div>
+            </div>
+
+            <!-- THANH PROGRESS BAR (Tiến trình tới Mốc 10 Tem Happy Fridge) -->
+            <div class="stamp-progress-section">
+              <div class="stamp-progress-header-info">
+                <span class="prog-label">Tiến trình tích tem</span>
+                <span class="prog-val" id="progCurrentLabel">10 TEM</span>
+              </div>
+              <div class="stamp-progress-track">
+                <div class="stamp-progress-fill" id="stampProgressFill" style="width: 82%;"></div>
+                <!-- Node Mốc 10 Tem: Hộp quà Happy Fridge -->
+                <div class="stamp-progress-node node-10" id="progressNode10" style="left: 82%;" title="Mốc 10 Tem: Hộp quà Happy Fridge">
+                  <span>10</span>
+                  <span class="node-sublabel">Happy Fridge</span>
+                </div>
+                <!-- Node Overflow khi > 10 Tem -->
+                <div class="stamp-progress-node node-overflow" id="progressNodeOverflow" style="left: 100%; display: none;" title="Vượt qua 10 Tem">
+                  <span id="progressOverflowCount">+1</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- MỐC ĐỔI TEM DUY NHẤT: 10 TEM → HỘP QUÀ HAPPY FRIDGE -->
+            <div class="clean-milestones-container single-milestone-container">
+              <!-- MỐC 10 TEM: HỘP QUÀ HAPPY FRIDGE -->
+              <div class="clean-milestone-card m10-card single-hero-card" id="milestoneActionCard10">
+                <div class="cm-card-top-row">
+                  <div class="cm-left-icon cm-icon-fridge-10">
+                    <i class="fa-solid fa-box-archive"></i>
+                  </div>
+                  <div class="cm-center-info">
+                    <div class="cm-title-row">
+                      <strong>10 TEM &rarr; HỘP QUÀ HAPPY FRIDGE</strong>
+                    </div>
+                    <div class="cm-subtitle-row">
+                      Hộp quà đặc biệt mở tại quầy khi đổi
+                    </div>
+                    <div class="cm-badge-req" id="m10ReqBadge">
+                      <i class="fa-solid fa-circle-check"></i> Cần 10 Tem (<span id="m10StampCountLabel">10</span>/10)
+                    </div>
+                  </div>
+                  <button class="cm-redeem-btn btn-m10 enabled" id="milestoneClaimBtn10" data-milestone="10">
+                    ĐỔI QUÀ
+                  </button>
+                </div>
+
+                <!-- UI/UX HIỂN THỊ SỐ LƯỢNG 10 TEM TÍCH -->
+                <div class="milestone-stamps-tracker-box">
+                  <div class="tracker-header-row">
+                    <span class="tracker-title"><i class="fa-solid fa-stamp"></i> Tích tem đổi Hộp Quà:</span>
+                    <span class="tracker-progress-text ready" id="m10ProgressStatusText">Đủ 10/10 Tem! (Sẵn sàng đổi quà) 🎉</span>
+                  </div>
+                  <div class="mini-stamp-slots-row slots-10" id="m10MiniSlotsRow">
+                    <!-- Rendered by JS: 10 mini stamp slots -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MỤC DANH SÁCH CỬA HÀNG ĐỔI HỘP QUÀ HAPPY FRIDGE (Theo UI/UX Store List.jpg & Store List - Expand.jpg) -->
+            <div class="store-list-entry-card" id="openStoreListBtn">
+              <div class="sle-icon-box">
+                <i class="fa-solid fa-store"></i>
+              </div>
+              <div class="sle-content">
+                <div class="sle-badge"><i class="fa-solid fa-location-dot"></i> ĐIỂM ĐỔI QUÀ</div>
+                <h4 class="sle-title">Danh sách cửa hàng Đổi HỘP QUÀ HAPPY FRIDGE</h4>
+                <p class="sle-sub">Kiểm tra tình trạng còn quà tại Miền Nam & Miền Bắc</p>
+              </div>
+              <div class="sle-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- T&C CHƯƠNG TRÌNH TÍCH TEM ĐỔI QUÀ (Thay thế box thời hạn code & mở trang T&C) -->
+            <div class="stamp-terms-entry-card" id="openStampTermsBtn">
+              <div class="ste-icon-box">
+                <i class="fa-solid fa-file-contract"></i>
+              </div>
+              <div class="ste-content">
+                <div class="ste-badge"><i class="fa-solid fa-circle-info"></i> THỂ LỆ & QUY ĐỊNH</div>
+                <h4 class="ste-title">T&C chương trình Tích Tem Đổi Quà</h4>
+                <p class="ste-sub">Điều kiện tích tem, cơ chế đổi quà & thời hạn 30 ngày sử dụng code</p>
+              </div>
+              <div class="ste-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW: DANH SÁCH CỬA HÀNG ĐỔI HỘP QUÀ HAPPY FRIDGE (100% replica theo Store List.jpg & Store List - Expand.jpg) -->
+      <section id="store-list-page" class="app-page">
+        <!-- Webview Nav Header -->
+        <div class="webview-header-nav store-list-nav-header">
+          <button class="back-home-btn" id="backToStampFromStoreList">
+            <i class="fa-solid fa-chevron-left"></i> Game Tem
+          </button>
+          <span class="wv-title">Cửa Hàng Đổi Quà</span>
+          <button class="icon-btn-sm" id="storeListHelpBtn" title="Hướng dẫn"><i class="fa-regular fa-circle-question"></i></button>
+        </div>
+
+        <div class="webview-scroll-content store-list-scroll-content">
+          <!-- Hero Graphic Banner (Gọn gàng, đã lược bỏ đoạn text giới thiệu dư thừa dài dòng) -->
+          <div class="store-list-hero-card">
+            <div class="sl-hero-illustration">
+              <div class="sl-mascot-group">
+                <span class="mascot-badge-pill">
+                  <i class="fa-solid fa-gift"></i> ĐỔI TEM & NHẬN QUÀ DỄ DÀNG
+                </span>
+                <div class="sl-mascots-row">
+                  <div class="sl-mascot cat-mascot">🐱 <span class="bubble-heart">❤️</span></div>
+                  <div class="sl-mascot fridge-mascot">🎁 <span class="fridge-gift-sparkle">✨</span></div>
+                  <div class="sl-mascot girl-mascot">👧 <span class="bubble-star">⭐</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segmented Toggle (Miền Nam | Miền Bắc) -->
+          <div class="store-region-switch-bar">
+            <button type="button" class="region-tab-btn active" id="tabStoreSouth" data-region="south">
+              <i class="fa-solid fa-sun"></i> Miền Nam
+            </button>
+            <button type="button" class="region-tab-btn" id="tabStoreNorth" data-region="north">
+              <i class="fa-solid fa-snowflake"></i> Miền Bắc
+            </button>
+          </div>
+
+          <!-- Dynamic Container for Gift Items and Accordion Stores (Chỉ hiển thị chương trình Tích Tem Đổi Quà, không hiển thị chương trình khác) -->
+          <div class="store-gift-cards-container" id="storeGiftCardsContainer">
+            <!-- Rendered by JS based on region selection -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: ĐIỀU KHOẢN & ĐIỀU KIỆN (T&C CHƯƠNG TRÌNH TÍCH TEM ĐỔI QUÀ) -->
+      <section id="stamp-terms-page" class="app-page">
+        <!-- Webview Nav Header -->
+        <div class="webview-header-nav stamp-terms-nav-header">
+          <button class="back-home-btn" id="backToStampFromTerms">
+            <i class="fa-solid fa-chevron-left"></i> Game Tem
+          </button>
+          <span class="wv-title">Điều Khoản & Thể Lệ</span>
+          <button class="icon-btn-sm" id="termsShareBtn" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+        </div>
+
+        <div class="webview-scroll-content stamp-terms-scroll-content">
+          <!-- Hero Header Card -->
+          <div class="terms-hero-card">
+            <div class="terms-hero-badge"><i class="fa-solid fa-award"></i> GS25 LOYALTY 2026</div>
+            <h3 class="terms-hero-title">ĐIỀU KHOẢN & ĐIỀU KIỆN<br>CHƯƠNG TRÌNH TÍCH TEM ĐỔI QUÀ</h3>
+            <p class="terms-hero-subtitle">Áp dụng cho toàn bộ thành viên GS25 trên hệ thống toàn quốc</p>
+          </div>
+
+          <!-- Section 1: Thời gian & Đối tượng áp dụng -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-regular fa-calendar-check"></i></div>
+              <h4>1. Thời gian & Đối tượng áp dụng</h4>
+            </div>
+            <div class="tsc-body">
+              <ul>
+                <li><strong>Thời gian chương trình:</strong> Bắt đầu từ 00:00 ngày đầu tháng đến 23:59 ngày cuối cùng mỗi tháng.</li>
+                <li><strong>Đối tượng tham gia:</strong> Toàn bộ khách hàng có tài khoản thành viên GS25 Loyalty App (Bao gồm các hạng: <em>Standard, Gold, Platinum</em>).</li>
+                <li><strong>Phạm vi:</strong> Toàn bộ hệ thống cửa hàng GS25 tại Miền Nam và Miền Bắc.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 2: Cách thức tích tem -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-stamp"></i></div>
+              <h4>2. Điều kiện & Cách thức tích tem</h4>
+            </div>
+            <div class="tsc-body">
+              <p>Khách hàng xuất trình mã thành viên (Member QR / Barcode) khi thanh toán tại quầy thu ngân GS25. Hệ thống sẽ tự động ghi nhận <strong>01 Tem</strong> khi thỏa mãn đồng thời 2 điều kiện:</p>
+              <div class="tsc-highlight-box">
+                <div class="th-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span><strong>Điều kiện 1:</strong> Hóa đơn mua hàng có tổng giá trị thanh toán thực tế từ <strong>100.000 VNĐ</strong> trở lên.</span>
+                </div>
+                <div class="th-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span><strong>Điều kiện 2:</strong> Trong giỏ hàng có ít nhất <strong>01 sản phẩm của Nhà tài trợ</strong> thuộc danh mục chiến dịch tháng.</span>
+                </div>
+              </div>
+              <p class="tsc-note">* Không giới hạn số lượng tem tích lũy trong suốt thời gian diễn ra chiến dịch.</p>
+            </div>
+          </div>
+
+          <!-- Section 3: Cơ chế đổi thưởng -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-gift"></i></div>
+              <h4>3. Cơ chế & Mốc đổi phần thưởng</h4>
+            </div>
+            <div class="tsc-body">
+              <ul>
+                <li><strong>Mốc đổi quà:</strong> Khi tích lũy đủ <strong>10 Tem</strong>, thành viên đủ điều kiện bấm nút <strong>"ĐỔI QUÀ"</strong> để nhận ngay <strong>01 Hộp Quà Happy Fridge</strong> độc quyền.</li>
+                <li><strong>Số lượng lượt đổi:</strong> Khách hàng có thể tiếp tục tích tem và đổi thêm nhiều phần quà sau khi hoàn thành mốc 10 tem.</li>
+                <li>Hệ thống tự động phát hành mã Coupon/Voucher đổi quà điện tử ngay khi thao tác đổi quà hoàn tất.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 4: Thời hạn sử dụng mã quà tặng (Quy định 30 ngày) -->
+          <div class="terms-section-card highlight-expiry-card">
+            <div class="tsc-header">
+              <div class="tsc-icon green"><i class="fa-regular fa-clock"></i></div>
+              <h4>4. Thời hạn sử dụng mã quà tặng</h4>
+            </div>
+            <div class="tsc-body">
+              <div class="expiry-callout-box">
+                <div class="ecb-title"><i class="fa-solid fa-hourglass-half"></i> HIỆU LỰC CODE QUÀ TẶNG: 30 NGÀY</div>
+                <p>Thời hạn sử dụng mã code đổi quà là <strong>30 ngày</strong> kể từ thời điểm thành viên bấm Đổi Quà thành công và quà tặng được lưu trữ vào mục <strong>"Tủ Lạnh 25" / "Quà Của Tôi"</strong> trên ứng dụng GS25.</p>
+              </div>
+              <p class="tsc-warning"><i class="fa-solid fa-triangle-exclamation"></i> Quá thời hạn 30 ngày, mã quà tặng sẽ tự động hết hạn và không thể gia hạn hoặc hoàn trả tem đã tích lũy.</p>
+            </div>
+          </div>
+
+          <!-- Section 5: Quy trình nhận quà tại cửa hàng -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-store"></i></div>
+              <h4>5. Địa điểm & Quy trình nhận quà tại cửa hàng</h4>
+            </div>
+            <div class="tsc-body">
+              <ol class="tsc-steps-list">
+                <li>Tra cứu danh sách cửa hàng đổi quà hợp lệ tại mục <strong>"Danh sách cửa hàng Đổi Hộp Quà Happy Fridge"</strong>.</li>
+                <li>Đến cửa hàng GS25 thuận tiện, mở mục <strong>Tủ Lạnh 25</strong> và xuất trình mã QR Hộp Quà cho nhân viên thu ngân.</li>
+                <li>Nhân viên scan mã thành công và trao trực tiếp Hộp Quà Happy Fridge cho thành viên.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Section 6: Các quy định chung -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <h4>6. Quy định chung khác</h4>
+            </div>
+            <div class="tsc-body">
+              <ul>
+                <li>Phần quà không có giá trị quy đổi thành tiền mặt hoặc chuyển nhượng dưới bất kỳ hình thức nào.</li>
+                <li>GS25 có quyền từ chối trao thưởng nếu phát hiện hành vi gian lận điểm, tem hoặc can thiệp kỹ thuật trái phép.</li>
+                <li>Trong trường hợp xảy ra tranh chấp, quyết định cuối cùng thuộc về Ban Quản Trị GS25 Việt Nam theo đúng quy định pháp luật.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CTA Button to Return to Stamp Game -->
+          <div class="terms-bottom-action">
+            <button class="btn-terms-return" id="btnTermsReturn">
+              <i class="fa-solid fa-arrow-left"></i> Quay lại Trang Tích Tem
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: WEBVIEW 2 - GS25 E-GIFT CARD PROGRAM -->
+      <section id="egift-card" class="app-page">
+        <!-- Webview Nav Header -->
+        <div class="webview-header-nav">
+          <button class="back-home-btn" id="backToHomeFromCard"><i class="fa-solid fa-chevron-left"></i> Trang chủ</button>
+          <span class="wv-title">GS25 E-Gift Card</span>
+          <button class="icon-btn-sm" id="cardHelpBtn"><i class="fa-regular fa-circle-question"></i></button>
+        </div>
+
+        <div class="webview-scroll-content">
+          
+          <!-- SUB-VIEW A: CATALOG LIST VIEW -->
+          <div id="egift-card-list-view">
+            <!-- E-Gift Card Category Title Banner -->
+            <div class="egift-single-banner">
+              <i class="fa-solid fa-gift"></i>
+              <div>
+                <h4>GS25 E-GIFT CARD PLATFORM</h4>
+                <p>Thẻ Quà Tặng Điện Tử - Nạp tiền & Thanh toán tiện lợi tại POS GS25</p>
+              </div>
+            </div>
+
+            <!-- 4 Real Card Denominations Slider -->
+            <div class="cards-real-slider-header">
+              <i class="fa-solid fa-wallet"></i> CHỌN THẺ E-GIFT CARD (NHẤP ĐỂ XEM CHI TIẾT)
+            </div>
+            <div class="cards-real-slider">
+              <div class="gs25-real-card green-card" data-cardid="10001" data-val="100000" data-name="GS25 Standard 100K">
+                <div class="card-header-row">
+                  <span class="card-logo">GS<span>25</span> <small>STANDARD</small></span>
+                  <span class="card-code-pill">100K</span>
+                </div>
+                <div class="card-mascot-img">
+                  <span class="mascot-cat-icon">🐱</span>
+                </div>
+                <div class="card-amount-tag">100.000 VNĐ</div>
+              </div>
+
+              <div class="gs25-real-card black-card active" data-cardid="20002" data-val="200000" data-name="GS25 Standard 200K">
+                <div class="card-header-row">
+                  <span class="card-logo">GS<span>25</span> <small>STANDARD</small></span>
+                  <span class="card-code-pill">200K</span>
+                </div>
+                <div class="card-mascot-img">
+                  <span class="mascot-girl-icon">👧</span>
+                </div>
+                <div class="card-amount-tag">200.000 VNĐ</div>
+              </div>
+
+              <div class="gs25-real-card pink-card" data-cardid="30003" data-val="300000" data-name="GS25 Standard 300K">
+                <div class="card-header-row">
+                  <span class="card-logo">GS<span>25</span> <small>STANDARD</small></span>
+                  <span class="card-code-pill">300K</span>
+                </div>
+                <div class="card-mascot-img">
+                  <span class="mascot-cat-icon">🐱</span>
+                </div>
+                <div class="card-amount-tag">300.000 VNĐ</div>
+              </div>
+
+              <div class="gs25-real-card premium-gold-card" data-cardid="50005" data-val="500000" data-name="GS25 Premium 500K">
+                <div class="card-header-row">
+                  <span class="card-logo">GS<span>25</span> <small>PREMIUM 500K</small></span>
+                  <span class="card-code-pill">+4% BONUS</span>
+                </div>
+                <div class="card-mascot-img">
+                  <span class="mascot-girl-icon">👑</span>
+                </div>
+                <div class="card-amount-tag">500.000 VNĐ</div>
+              </div>
+            </div>
+
+            <!-- Selected Card Quick Actions -->
+            <div class="card-quick-actions">
+              <button class="act-btn primary" id="openCardDetailDirectBtn"><i class="fa-solid fa-credit-card"></i> Xem chi tiết thẻ & T&C</button>
+              <button class="act-btn secondary" id="openPayModalBtn"><i class="fa-solid fa-qrcode"></i> Thanh toán tại POS</button>
+            </div>
+
+            <!-- OFFLINE POS TOP-UP SECTION -->
+            <div class="topup-section pos-offline-box">
+              <div class="pos-topup-header">
+                <i class="fa-solid fa-store icon-pos"></i>
+                <div>
+                  <h3>NẠP TIỀN TRỰC TIẾP TẠI QUẦY POS CỬA HÀNG</h3>
+                  <span class="pos-badge-only"><i class="fa-solid fa-shield-halved"></i> CHỈ NẠP OFFLINE TẠI STORE</span>
+                </div>
+              </div>
+              
+              <p class="section-desc pos-desc">
+                Vui lòng đưa mã <strong>QR E-Gift Card</strong> cho Thu ngân tại quầy GS25 bất kỳ để nạp tiền trực tiếp bằng Tiền mặt hoặc Thẻ ngân hàng tại máy POS.
+              </p>
+
+              <button class="show-pos-qr-btn" id="showPosQrBtn">
+                <i class="fa-solid fa-qrcode"></i> HIỂN THỊ MÃ QR NẠP TIỀN TẠI POS
+              </button>
+
+              <div class="pos-sim-box">
+                <div class="pos-sim-title"><i class="fa-solid fa-cash-register"></i> MÔ PHỎNG THU NGÂN NẠP TIỀN TẠI POS (DEMO TOOL)</div>
+                <div class="pos-sim-buttons">
+                  <button class="pos-topup-btn" id="posTopup100Btn">+100.000đ (POS)</button>
+                  <button class="pos-topup-btn" id="posTopup200Btn">+200.000đ (POS)</button>
+                  <button class="pos-topup-btn" id="posTopup300Btn">+300.000đ (POS)</button>
+                  <button class="pos-topup-btn bonus" id="posTopup500Btn">+500.000đ (+4% Bonus)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-VIEW B: CARD DETAIL & T&C VIEW (Replica of Prepaid Card Flow Detail.png & Prepaid Card - Active.jpg) -->
+          <div id="egift-card-detail-view" style="display: none;">
+            <div class="detail-sub-header">
+              <button class="back-to-catalog-btn" id="backToCardCatalogBtn">
+                <i class="fa-solid fa-chevron-left"></i> Thẻ của bạn
+              </button>
+              <div class="card-type-toggle-pills">
+                <span class="type-pill active">Prepaid Card</span>
+                <span class="type-pill">Gift Card</span>
+              </div>
+            </div>
+
+            <!-- Card Graphic Banner -->
+            <div class="detail-card-hero black-hero" id="detailCardGraphic">
+              <div class="hero-top-row">
+                <span class="hero-brand">GS<span>25</span></span>
+                <span class="hero-code-masked" id="detailCardCode">*****007</span>
+              </div>
+              <div class="hero-mascot-row">
+                <span class="hero-mascot-cat">🐱</span>
+                <span class="hero-initial-val" id="detailInitialVal">500.000đ</span>
+              </div>
+              <div class="hero-balance-row">
+                <span>Còn lại</span>
+                <strong id="detailCardRemaining">120.000đ</strong>
+              </div>
+            </div>
+
+            <div class="tnc-link-bar">
+              <a id="scrollToTncBtn"><i class="fa-regular fa-circle-question"></i> Xem điều khoản và thể lệ</a>
+            </div>
+
+            <!-- Transaction History Section -->
+            <div class="detail-section-box">
+              <div class="section-title-row">
+                <h4>Lịch sử giao dịch</h4>
+                <span class="time-tag">30 ngày gần nhất</span>
+              </div>
+              <div class="detail-txn-list" id="detailTxnList">
+                <div class="detail-txn-card">
+                  <div class="txn-card-header">
+                    <strong>Yay! Chốt đơn thành công!</strong>
+                    <span class="txn-amount debit">-400.000đ</span>
+                  </div>
+                  <div class="txn-meta-row">
+                    <span>21:38 - 16/08/2026</span>
+                    <span>GS25 106 Nguyen Gian Thanh</span>
+                  </div>
+                  <div class="txn-code-bar">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>e124bdj-23jjkfnk-kj2b31k-nmmvva12</span>
+                  </div>
+                  <button class="txn-detail-btn">Xem chi tiết</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- T&C Information Details (100% replica of Prepaid Card Flow Detail.png & Prepaid Card - Active.jpg) -->
+            <div class="detail-section-box tnc-details-box" id="tncDetailsBox">
+              <h4 class="tnc-heading">Đối tượng áp dụng</h4>
+              <ul class="tnc-bullets">
+                <li>Thẻ được phát hành và bán tại tất cả các cửa hàng GS25 trên toàn quốc.</li>
+                <li>Thẻ được sử dụng để thanh toán khi mua hàng tại hệ thống cửa hàng GS25 toàn quốc.</li>
+                <li>Thẻ không có giá trị quy đổi thành tiền mặt.</li>
+                <li>Thẻ có thể được nạp thêm tiền theo các mệnh giá quy định của GS25 hiện hành tại cửa hàng.</li>
+                <li>Có tool để kiểm tra số dư hiện hữu của thẻ</li>
+              </ul>
+
+              <h4 class="tnc-heading mt-16">Cách sử dụng</h4>
+              <ul class="tnc-bullets">
+                <li>Mỗi giao dịch chỉ sử dụng một thẻ duy nhất. Không áp dụng đồng thời các voucher khác nhau.</li>
+                <li>Thẻ được chấp nhận tại quầy thanh toán cho tất cả các sản phẩm hiện có tại cửa hàng.</li>
+                <li>Thanh toán bằng thẻ không được tích điểm vào tài khoản thành viên.</li>
+                <li>Có thể kết hợp thẻ với các chương trình khuyến mãi khác (nếu chương trình không quy định giới hạn) tại thời điểm thanh toán.</li>
+              </ul>
+            </div>
+
+            <!-- Agreement Checkbox -->
+            <div class="tnc-agreement-row">
+              <label class="custom-checkbox">
+                <input type="checkbox" id="cardTncCheck" checked>
+                <span class="checkmark"></span>
+                <span class="check-label">Tôi đã đọc và đồng ý với các điều khoản và điều kiện.</span>
+              </label>
+            </div>
+
+            <!-- Bottom Sticky Action Button -->
+            <div class="detail-bottom-actions">
+              <button class="card-pay-action-btn" id="payFromDetailBtn">
+                <i class="fa-solid fa-qrcode"></i> Thanh toán
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW 5: TỦ LẠNH 25 FULL PAGE VIEW (100% replica of 6.0.0 Opt#1 & Opt#2 & 8.2.0 My Gift) -->
+      <section id="tu-lanh" class="app-page">
+        <!-- Top Nav Header -->
+        <div class="webview-header-nav">
+          <button class="back-home-btn" id="backToHomeFromFridge"><i class="fa-solid fa-chevron-left"></i> Trang chủ</button>
+          <span class="wv-title">Tủ Lạnh 25</span>
+          <button class="icon-btn-sm" id="openFridgeInfoModalBtn" title="Hướng dẫn dùng Tủ Lạnh 25"><i class="fa-solid fa-circle-info"></i></button>
+        </div>
+
+        <div class="webview-scroll-content tulanh-scroll-bg">
+          <!-- Stylized Tủ Lạnh 25 Header Banner -->
+          <div class="tulanh-hero-header">
+            <div class="tulanh-bubble-logo">
+              <span class="t-word">Tủ Lạnh</span>
+              <span class="num-word">25</span>
+            </div>
+            <p class="tl-slogan-header">GIỮ YÊU THƯƠNG TRAO TIỆN LỢI <i class="fa-regular fa-circle-question"></i></p>
+            <p class="tl-subtitle">Là nơi lưu giữ quà tặng & sản phẩm bạn đã mua hoặc được nhận, để dùng lại bất cứ lúc nào.</p>
+
+            <!-- Mascot Guide Box (6.0.0 Opt#2) -->
+            <div class="mascot-onboarding-box">
+              <div class="mascot-cat-draw">🐱</div>
+              <div class="mascot-guide-steps">
+                <strong>Dùng Tủ Lạnh dễ ơi là dễ</strong>
+                <ol>
+                  <li><span>1</span> Mua đồ hoặc ai đó tặng quà</li>
+                  <li><span>2</span> Deal sẽ vào Tủ Lạnh</li>
+                  <li><span>3</span> Lúc nào muốn dùng thì chỉ cần chọn mã</li>
+                  <li><span>4</span> Quét tại <strong>GS25</strong> là nhận quà liền tay</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- Segment Selector (My Storage vs My Gift) -->
+            <div class="tulanh-segment-tabs">
+              <button class="segment-tab active" id="tabMyStorage">My Storage</button>
+              <button class="segment-tab" id="tabMyGift">My Gift <span class="tab-badge-num" id="myGiftBadge">3</span></button>
+            </div>
+          </div>
+
+          <!-- PANEL 1: MY STORAGE (Opt #1 - 6.0.0 Opt#1.jpg) -->
+          <div class="tulanh-panel active" id="panelMyStorage">
+            <div class="tulanh-section-header">
+              <h3>Ưu đãi bạn đã lưu</h3>
+              <a class="see-all-link">Xem tất cả</a>
+            </div>
+
+            <!-- Horizontal Item Cards Carousel -->
+            <div class="tulanh-horizontal-cards">
+              <div class="tulanh-item-card">
+                <span class="gs-tag">GS25</span>
+                <div class="t-img-box green-snack-bg">
+                  <i class="fa-solid fa-bread-slice"></i>
+                </div>
+                <div class="t-exp-tag">Hạn đổi 30/6/25</div>
+                <h4 class="t-name">Bánh Mì Nướng Youus Mini Garlic Rusk</h4>
+                <div class="t-qty-row">
+                  <span class="qty-pill"><strong>3</strong> gói</span>
+                </div>
+                <button class="tulanh-use-btn" data-item="Bánh Mì Nướng Youus">Sử dụng</button>
+              </div>
+
+              <div class="tulanh-item-card">
+                <span class="gs-tag">GS25</span>
+                <div class="t-img-box pink-tea-bg">
+                  <i class="fa-solid fa-bottle-water"></i>
+                </div>
+                <div class="t-exp-tag">Hạn đổi 30/6/25</div>
+                <h4 class="t-name">Trà Bưởi Youus Icetea Grapefruit Honey Black 500ml</h4>
+                <div class="t-qty-row">
+                  <span class="qty-pill"><strong>2</strong> chai</span>
+                </div>
+                <button class="tulanh-use-btn" data-item="Trà Bưởi Youus">Sử dụng</button>
+              </div>
+
+              <div class="tulanh-item-card">
+                <span class="gs-tag">GS25</span>
+                <div class="t-img-box choc-bg">
+                  <i class="fa-solid fa-cookie"></i>
+                </div>
+                <div class="t-exp-tag">Hạn đổi 30/6/25</div>
+                <h4 class="t-name">Snack Socola Youus Pistachio Chocolatta</h4>
+                <div class="t-qty-row">
+                  <span class="qty-pill"><strong>3</strong> gói</span>
+                </div>
+                <button class="tulanh-use-btn" data-item="Snack Socola Youus">Sử dụng</button>
+              </div>
+            </div>
+
+            <!-- Vertical List Section ("Lưu lâu quá xài thôi") -->
+            <div class="tulanh-vertical-section">
+              <h3 class="section-catchy-title">Lưu lâu quá xài thôi</h3>
+
+              <div class="tulanh-list-card">
+                <span class="gs-tag">GS25</span>
+                <div class="l-img-box"><i class="fa-solid fa-bottle-water"></i></div>
+                <div class="l-info">
+                  <span class="l-exp">Hạn đổi 30/6/25</span>
+                  <h5>Trà Bưởi Youus Icetea Grapefruit Honey Black 500ml</h5>
+                  <span class="l-unit"><strong>3</strong> gói</span>
+                </div>
+                <button class="tulanh-use-btn" data-item="Trà Bưởi Youus">Sử dụng</button>
+              </div>
+
+              <div class="tulanh-list-card">
+                <span class="gs-tag">GS25</span>
+                <div class="l-img-box"><i class="fa-solid fa-mug-hot"></i></div>
+                <div class="l-info">
+                  <span class="l-exp">Hạn đổi 30/6/25</span>
+                  <h5>Trà Xanh Youus Boseong Green Tea Iced Tea 340ml</h5>
+                  <span class="l-unit"><strong>2</strong> chai</span>
+                </div>
+                <button class="tulanh-use-btn" data-item="Trà Xanh Youus">Sử dụng</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 2: MY GIFT (100% replica of 8.2.0 Tủ lạnh - My Gift.jpg) -->
+          <div class="tulanh-panel" id="panelMyGift">
+            <div class="my-gift-top-header">
+              <h3 class="my-gift-main-title">My gift</h3>
+              <p class="my-gift-sub-desc">Mở quà ngay đi chần chờ chi.</p>
+            </div>
+
+            <!-- Dynamic Gift Cards Container (Renders default & Stamp Game rewards) -->
+            <div class="my-gift-vertical-list" id="myGiftsListContainer">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FLOATING ACTION WIDGET (10.0.0 Floating Button.jpg) -->
+      <div class="floating-promo-widget" id="floatingPromoWidget">
+        <button class="floating-close-btn" id="closeFloatingWidgetBtn">&times;</button>
+        <div class="floating-widget-content" id="openFloatingQrBtn">
+          <div class="widget-grid-pattern"></div>
+          <strong>TÍCH TEM DỄ</strong>
+          <span>ĐỔI QUÀ MÊ</span>
+        </div>
+      </div>
+
+      <!-- App Bottom Navigation Bar (3 GS25 App Tabs) -->
+      <nav class="app-bottom-nav">
+        <button class="nav-tab active" data-nav="home-screen">
+          <i class="fa-solid fa-house"></i>
+          <span>Trang chủ</span>
+        </button>
+        <button class="nav-tab" data-nav="tu-lanh">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Tủ lạnh</span>
+        </button>
+        <button class="nav-tab" data-nav="egift-card">
+          <i class="fa-solid fa-user"></i>
+          <span>Thành viên</span>
+        </button>
+      </nav>
+
+    </div>
+  </main>
+
+  <!-- MODAL 1: REWARD & DEAL DETAILS MODAL (100% replica of 3.0.1 Reward Details & 4.0.1 Deals Details) -->
+  <div class="modal-overlay" id="rewardDetailModal">
+    <div class="modal-content reward-detail-modal">
+      <div class="reward-modal-hero">
+        <button class="modal-back-btn" id="closeRewardDetailModalBtn"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="hero-bg-poster" id="detailHeroPoster">
+          <div class="hero-banner-title" id="detailHeroTitle">BỮA XẾ CHILL</div>
+        </div>
+      </div>
+
+      <div class="reward-modal-body">
+        <!-- Floating white info card -->
+        <div class="detail-floating-card">
+          <div class="detail-date-pill" id="detailExpDate">Hạn đổi 30/6/25</div>
+          <h3 class="detail-item-title" id="detailItemTitle">Tặng 1 phần mì ý trị giá 50.000đ</h3>
+          <div class="detail-point-pill" id="detailPointBadge"><i class="fa-solid fa-sun icon-star-gold"></i> <strong>5.000</strong> điểm</div>
+        </div>
+
+        <p class="detail-scope-text">Áp dụng tại các cửa hàng GS25 toàn quốc.</p>
+
+        <div class="detail-terms-box">
+          <h4>Điều khoản</h4>
+          <p id="detailTermsText">Khách hàng có thể sử dụng điểm tích lũy để đổi lấy sản phẩm miễn phí tại tất cả cửa hàng GS25.</p>
+
+          <h4 class="mt-12">Lưu ý</h4>
+          <ul class="terms-bullet-list">
+            <li>Vui lòng kiểm tra kỹ thời hạn và điều kiện sử dụng trước khi đổi.</li>
+            <li>Phần ăn/sản phẩm không có giá trị quy đổi thành tiền mặt.</li>
+            <li>Không hoàn lại điểm sau khi đã xác nhận đổi thành công.</li>
+            <li>Chương trình có thể thay đổi mà không cần thông báo trước.</li>
+          </ul>
+        </div>
+
+        <!-- Sticky Bottom Bar -->
+        <div class="detail-bottom-sticky">
+          <div class="user-pts-row">
+            <span>Bạn đang có</span>
+            <strong id="detailUserPts">9.500 điểm</strong>
+          </div>
+          <button class="modal-primary-blue-btn" id="confirmRedeemBtn">Đổi ngay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: PAYMENT / POS TOP-UP QR CODE MODAL -->
+  <div class="modal-overlay" id="payModal">
+    <div class="modal-content pay-qr-modal">
+      <div class="modal-header">
+        <h3>Quét mã để thanh toán</h3>
+        <button class="modal-close" id="closePayModalBtn">&times;</button>
+      </div>
+
+      <div class="qr-modal-body">
+        <div class="qr-instruction-title">Chỉ 2 bước đơn giản:</div>
+        <p class="qr-sub-bold">Quét cả hai lượt là nhận quà ngay!!!</p>
+        
+        <div class="qr-toggle-tabs">
+          <button class="qr-tab-btn active" id="qrTabPay"><span class="step-num">1</span> Mã thanh toán</button>
+          <button class="qr-tab-btn" id="qrTabMember"><span class="step-num">2</span> Mã thành viên</button>
+        </div>
+
+        <div class="qr-card-preview">
+          <div class="card-mini-title" id="modalCardTitle">THẺ GS25 E-GIFT / TỦ LẠNH 25</div>
+          <div class="card-mini-balance">Số dư: <strong id="modalCardBalance">200.000đ</strong></div>
+        </div>
+
+        <div class="qr-display-box">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=GS25TULANH-8901459201948821" alt="Payment QR Code" id="payQrImg">
+          <div class="barcode-simulation" id="barcodeDisplay">
+            ||||| | |||| ||| ||||| |||| ||||
+            <span>8901 4592 0194 8821</span>
+          </div>
+          <div class="qr-timer"><i class="fa-regular fa-clock"></i> còn lại <span id="qrCountdown">00:15s</span></div>
+          <div class="qr-refresh-link" id="refreshQrBtn">Mã có hiệu lực trong 60s <a id="linkRefreshCode">Làm mới</a></div>
+        </div>
+
+        <button class="modal-primary-btn full-blue" id="closePayModalBtn2">Trở lại trang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: TỦ LẠNH 25 INFO MODAL -->
+  <div class="modal-overlay" id="fridgeInfoModal">
+    <div class="modal-content fridge-info-modal">
+      <div class="modal-header">
+        <div class="tl-modal-title">tủlạnh<span>25</span></div>
+        <button class="modal-close" id="closeFridgeInfoModalBtn">&times;</button>
+      </div>
+      <div class="fridge-info-body">
+        <h4>Ưu đãi và sản phẩm bạn đã mua hoặc được nhận, để dùng lại bất cứ lúc nào.</h4>
+        <div class="info-ngan-box">
+          <h5>Tủ Lạnh có 2 ngăn</h5>
+          <div class="ngan-item">
+            <strong>1. My Storage</strong>
+            <p>Món bạn đã mua dùng bất cứ lúc nào cũng được.</p>
+          </div>
+          <div class="ngan-item">
+            <strong>2. My Gift</strong>
+            <p>Quà từ GS25 hoặc bạn bè, đừng để lỡ nha!</p>
+          </div>
+        </div>
+
+        <div class="dung-tu-lanh-box">
+          <h5>Dùng Tủ Lạnh để làm gì?</h5>
+          <ul>
+            <li><i class="fa-solid fa-bag-shopping"></i> Mua đồ hoặc được tặng quà</li>
+            <li><i class="fa-solid fa-gift"></i> Reward sẽ vào Tủ Lạnh</li>
+            <li><i class="fa-solid fa-qrcode"></i> Muốn dùng? Chọn mã là xong</li>
+            <li><i class="fa-solid fa-store"></i> Quét tại GS25 là nhận quà liền tay</li>
+          </ul>
+        </div>
+
+        <button class="modal-primary-btn" id="closeFridgeInfoModalBtn2">Trở lại trang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: XÁC NHẬN ĐỔI QUÀ (100% GS25 STYLE theo hình đính kèm) -->
+  <div class="modal-overlay" id="redeemConfirmModal">
+    <div class="modal-content gs25-confirm-modal">
+      <div class="gs25-confirm-body">
+        <h3 class="gs25-confirm-title" id="confirmModalTitle">Bạn có muốn đổi tem?</h3>
+        <p class="gs25-confirm-sub" id="confirmModalSub">
+          Bạn đang đổi <strong>10 TEM</strong> lấy <strong>Hộp Quà Happy Fridge Đặc Biệt</strong>
+        </p>
+
+        <!-- Graphic Visual: Stamp -> Arrow -> Gift (Exact as attached photo) -->
+        <div class="gs25-exchange-visual">
+          <div class="visual-icon-circle coin-circle">
+            <i class="fa-solid fa-stamp" id="confirmStampVisualIcon"></i>
+            <span class="visual-stamp-qty" id="confirmStampVisualQty">10 TEM</span>
+          </div>
+          <div class="visual-arrow-right">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </div>
+          <div class="visual-icon-circle gift-circle">
+            <i class="fa-solid fa-box-archive" id="confirmGiftVisualIcon"></i>
+            <span class="visual-gift-tag" id="confirmGiftVisualTag">HAPPY FRIDGE</span>
+          </div>
+        </div>
+
+        <!-- Details Card -->
+        <div class="gs25-confirm-detail-card">
+          <div class="confirm-info-row">
+            <span class="c-label">Phần thưởng:</span>
+            <strong class="c-val" id="confirmRewardName">Hộp Quà Happy Fridge Đặc Biệt</strong>
+          </div>
+          <div class="confirm-info-row">
+            <span class="c-label">Biến động tem:</span>
+            <strong class="c-val text-red" id="confirmDeductStamps">-10 TEM (Tổng còn lại: 0 TEM)</strong>
+          </div>
+          <div class="confirm-info-row">
+            <span class="c-label">Nơi nhận quà:</span>
+            <span class="c-val text-blue"><i class="fa-solid fa-box-archive"></i> Tủ Lạnh 25 (My Gift)</span>
+          </div>
+          <div class="confirm-info-row">
+            <span class="c-label">Hạn sử dụng:</span>
+            <span class="c-val text-green"><i class="fa-regular fa-calendar-check"></i> 30 ngày kể từ lúc đổi</span>
+          </div>
+        </div>
+
+        <!-- 2 Call To Action Buttons (Exact as requested) -->
+        <div class="gs25-confirm-actions">
+          <button class="btn-gs25-primary" id="btnConfirmExchange">
+            Xác Nhận Đổi
+          </button>
+          <button class="btn-gs25-ghost" id="btnCancelExchange">
+            Trở Lại Trang
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CHỌN KHU VỰC NHẬN REWARD (MIỀN NAM / MIỀN BẮC) -->
+  <div class="modal-overlay" id="redeemRegionModal">
+    <div class="modal-content gs25-confirm-modal gs25-region-modal">
+      <div class="gs25-confirm-body">
+        <div class="region-modal-badge">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+
+        <h3 class="gs25-confirm-title" id="regionModalTitle">Bạn muốn đổi quà ở đâu?</h3>
+        <p class="gs25-confirm-sub" id="regionModalSub">
+          Chọn khu vực bạn muốn nhận phần thưởng. Quà tặng sẽ được chuyển vào <strong>Tủ Lạnh (My Gift)</strong>.
+        </p>
+
+        <!-- Current Reward Item Badge -->
+        <div class="region-item-selected-badge" id="regionSelectedRewardBadge">
+          <i class="fa-solid fa-gift"></i>
+          <span id="regionRewardNameDisplay">Hộp Quà Happy Fridge Đặc Biệt</span>
+        </div>
+
+        <!-- 2 Selection Buttons: Bên trái "Miền Nam" - Bên phải "Miền Bắc" (KHÔNG hiển thị số lượng stock còn quà trên UI) -->
+        <div class="region-select-grid" id="regionSelectGrid">
+          <!-- Button Bên Trái: Miền Nam -->
+          <button type="button" class="region-choice-btn" id="btnRegionSouth">
+            <div class="region-btn-icon south-icon">
+              <i class="fa-solid fa-sun"></i>
+            </div>
+            <div class="region-btn-title">Miền Nam</div>
+            <div class="region-btn-sub">TP.HCM & các tỉnh phía Nam</div>
+          </button>
+
+          <!-- Button Bên Phải: Miền Bắc -->
+          <button type="button" class="region-choice-btn" id="btnRegionNorth">
+            <div class="region-btn-icon north-icon">
+              <i class="fa-solid fa-snowflake"></i>
+            </div>
+            <div class="region-btn-title">Miền Bắc</div>
+            <div class="region-btn-sub">Hà Nội & các tỉnh phía Bắc</div>
+          </button>
+        </div>
+
+        <!-- Actions: Quay lại -->
+        <div class="gs25-confirm-actions" style="margin-top: 10px;">
+          <button class="btn-gs25-ghost" id="btnBackFromRegion">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại
+          </button>
+        </div>
+
+        <!-- Simulator Quick Stock Controls (For demoing & testing all cases) -->
+        <div class="region-stock-sim-bar">
+          <span class="sim-label"><i class="fa-solid fa-sliders"></i> Mô phỏng Kho quà (Test nhanh UI/UX):</span>
+          <div class="sim-pill-group">
+            <button type="button" class="stock-sim-pill active" id="simStockBoth">Còn 2 miền</button>
+            <button type="button" class="stock-sim-pill" id="simStockNoSouth">Hết Miền Nam</button>
+            <button type="button" class="stock-sim-pill" id="simStockNoNorth">Hết Miền Bắc</button>
+            <button type="button" class="stock-sim-pill" id="simStockNone">Hết cả 2 miền</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: POP-UP THÔNG BÁO HẾT STOCK QUÀ (MIỀN NAM / MIỀN BẮC) -->
+  <div class="modal-overlay" id="outOfStockModal">
+    <div class="modal-content gs25-confirm-modal gs25-out-stock-modal">
+      <div class="gs25-confirm-body">
+        <div class="out-stock-icon-bubble">
+          <i class="fa-solid fa-box-open"></i>
+        </div>
+        <h3 class="gs25-confirm-title text-out-stock" id="outOfStockTitle">HẾT STOCK QUÀ MIỀN NAM!</h3>
+        <p class="gs25-confirm-sub" id="outOfStockDesc">
+          Rất tiếc, phần thưởng <strong>Hộp Quà Happy Fridge</strong> tại khu vực <strong id="outOfStockRegionName">Miền Nam</strong> hiện đã hết stock.
+        </p>
+
+        <div class="out-stock-card-box">
+          <div class="out-stock-notice-pill">
+            <i class="fa-solid fa-circle-exclamation"></i> TẠM HẾT SUẤT QUÀ
+          </div>
+          <p class="out-stock-tip-text">
+            Quý khách vui lòng chọn khu vực khác hoặc quay lại sau nhé!
+          </p>
+        </div>
+
+        <div class="gs25-confirm-actions">
+          <button class="btn-gs25-primary" id="btnChooseOtherRegion">
+            <i class="fa-solid fa-map-location-dot"></i> Chọn Khu Vực Khác
+          </button>
+          <button class="btn-gs25-ghost" id="btnCloseOutOfStock">
+            Trở Lại Trang
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: POP-UP ĐỔI THÀNH CÔNG (GS25 REWARD ISSUE) -->
+  <div class="modal-overlay" id="redeemSuccessModal">
+    <div class="modal-content gs25-success-modal gs25-clean-success-modal">
+      <div class="gs25-success-header">
+        <div class="success-icon-bubble">
+          <i class="fa-solid fa-gift"></i>
+        </div>
+        <h3 class="success-title">ĐỔI QUÀ THÀNH CÔNG! 🎉</h3>
+        <p class="success-sub">Chúc mừng bạn đã đổi thành công phần thưởng từ GS25 Stamp Game!</p>
+      </div>
+
+      <div class="gs25-success-body clean-success-body">
+        <!-- Item voucher info: chỉ hiển thị đổi quà thành công, là quà HAPPY FRIDGE hoặc ITEM REWARD -->
+        <div class="redeemed-item-card clean-reward-card">
+          <div class="item-img-icon" id="successItemIcon"><i class="fa-solid fa-box-archive"></i></div>
+          <div class="item-detail-text">
+            <span class="source-tag" id="successBagSourceTag">MỐC 10 TEM • HAPPY FRIDGE</span>
+            <h4 id="successItemTitle">Hộp Quà Happy Fridge Đặc Biệt</h4>
+            <span class="val-text" id="successItemValue">Hộp quà đặc biệt mở tại quầy khi đổi</span>
+          </div>
+        </div>
+
+        <!-- My Gift notice: nằm trong Tủ Lạnh -->
+        <div class="fridge-destination-alert clean-destination-card">
+          <i class="fa-solid fa-box-archive icon-fridge"></i>
+          <div>
+            <strong>Đã chuyển vào Tủ Lạnh (Mục "My Gift")</strong>
+            <p id="successDestinationNotice">Phần quà đã sẵn sàng trong <strong>Tủ Lạnh (My Gift)</strong> để bạn sử dụng bất cứ lúc nào tại quầy GS25.</p>
+          </div>
+        </div>
+
+        <!-- 1 button duy nhất: "Trở Lại Trang" -->
+        <div class="gs25-confirm-actions single-action-btn">
+          <button class="btn-gs25-primary" id="stayStampGameBtn">
+            Trở Lại Trang
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: XEM BẢN ĐỒ CỬA HÀNG GS25 (Store Location Map Preview - Store List - Expand.jpg) -->
+  <div class="modal-overlay" id="storeMapModal">
+    <div class="modal-content gs25-confirm-modal gs25-map-modal">
+      <div class="gs25-confirm-body">
+        <div class="map-modal-header-icon">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <h3 class="gs25-confirm-title" id="mapModalStoreName">GS25 240 Bùi Viện</h3>
+        <p class="map-modal-address" id="mapModalAddress">240 Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, TP. Hồ Chí Minh</p>
+        
+        <div class="map-modal-meta-row">
+          <span class="map-stock-badge in-stock" id="mapModalStock"><i class="fa-solid fa-circle-check"></i> Điểm đổi quà chính thức</span>
+          <span class="map-hours-badge"><i class="fa-regular fa-clock"></i> Mở cửa 24/7</span>
+        </div>
+
+        <!-- Simulated Map Box -->
+        <div class="map-preview-box">
+          <div class="map-grid-pattern"></div>
+          <div class="map-pin-pulse">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <div class="map-road-lines"></div>
+          <span class="map-live-tag"><i class="fa-solid fa-satellite-dish"></i> GS25 Live Map</span>
+        </div>
+
+        <div class="gs25-confirm-actions">
+          <button class="btn-gs25-primary" id="btnOpenGoogleMaps">
+            <i class="fa-solid fa-diamond-turn-right"></i> Chỉ đường (Google Maps)
+          </button>
+          <button class="btn-gs25-ghost" id="btnCloseStoreMapModal">
+            Trở Lại Danh Sách
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-noti" id="toastNoti">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">Thông báo</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
