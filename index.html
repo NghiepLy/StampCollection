@@ -26,6 +26,15 @@
       <button class="switch-btn" data-target="egift-card"><i class="fa-solid fa-gift"></i> E-Gift Card</button>
       <button class="switch-btn fridge-toggle-btn" data-target="tu-lanh"><i class="fa-solid fa-box-archive"></i> Tủ Lạnh 25 <span class="badge" id="fridgeBadgeCount">6</span></button>
     </div>
+    <!-- Quick Simulation Tools for Reviewers -->
+    <div class="dev-sim-tools">
+      <span class="sim-tools-label"><i class="fa-solid fa-vial"></i> Test Tem:</span>
+      <button class="dev-sim-btn" id="simResetStampsBtn" title="Đặt lại 0 tem"><i class="fa-solid fa-rotate-left"></i> 0</button>
+      <button class="dev-sim-btn" id="simQuickAdd1Btn" title="Cộng nhanh 1 tem">+1</button>
+      <button class="dev-sim-btn" id="simQuickAdd5Btn" title="Cộng nhanh 5 tem">+5</button>
+      <button class="dev-sim-btn" id="simQuickAdd10Btn" title="Cộng nhanh 10 tem">+10</button>
+      <button class="dev-sim-btn" id="simQuickAdd12Btn" title="Cộng 12 tem để test vượt mốc 10 tem">+12</button>
+    </div>
   </header>
 
   <!-- Main Viewport Container -->
@@ -392,32 +401,19 @@
               </div>
             </div>
 
-            <!-- THỜI HẠN SỬ DỤNG CODE QUÀ TẶNG: 30 NGÀY -->
-            <div class="stamp-expiry-simple-card">
-              <i class="fa-regular fa-clock"></i>
-              <div class="expiry-text-block">
-                <strong>THỜI HẠN SỬ DỤNG CODE QUÀ TẶNG: 30 NGÀY</strong>
-                <p>Thời hạn sử dụng code quà tặng, 30 ngày kể từ thời điểm item reward được issue</p>
+            <!-- T&C CHƯƠNG TRÌNH TÍCH TEM ĐỔI QUÀ (Thay thế box thời hạn code & mở trang T&C) -->
+            <div class="stamp-terms-entry-card" id="openStampTermsBtn">
+              <div class="ste-icon-box">
+                <i class="fa-solid fa-file-contract"></i>
               </div>
-            </div>
-
-            <!-- Demo Quick Test Tool -->
-            <div class="clean-sim-actions-row">
-              <button class="clean-sim-btn" id="simResetStampsBtn" title="Đặt lại 0 tem">
-                <i class="fa-solid fa-rotate-left"></i> Reset (0)
-              </button>
-              <button class="clean-sim-btn" id="simQuickAdd1Btn" title="Cộng nhanh 1 tem">
-                <i class="fa-solid fa-plus"></i> +1 Tem
-              </button>
-              <button class="clean-sim-btn" id="simQuickAdd5Btn" title="Cộng nhanh 5 tem">
-                <i class="fa-solid fa-plus"></i> +5 Tem
-              </button>
-              <button class="clean-sim-btn" id="simQuickAdd10Btn" title="Cộng nhanh 10 tem">
-                <i class="fa-solid fa-plus"></i> +10 Tem
-              </button>
-              <button class="clean-sim-btn" id="simQuickAdd12Btn" title="Cộng nhanh 12 tem để test vượt mốc 10 tem">
-                <i class="fa-solid fa-bolt"></i> Test >10 (12 Tem)
-              </button>
+              <div class="ste-content">
+                <div class="ste-badge"><i class="fa-solid fa-circle-info"></i> THỂ LỆ & QUY ĐỊNH</div>
+                <h4 class="ste-title">T&C chương trình Tích Tem Đổi Quà</h4>
+                <p class="ste-sub">Điều kiện tích tem, cơ chế đổi quà & thời hạn 30 ngày sử dụng code</p>
+              </div>
+              <div class="ste-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
             </div>
           </div>
 
@@ -436,7 +432,7 @@
         </div>
 
         <div class="webview-scroll-content store-list-scroll-content">
-          <!-- Hero Graphic Banner (Exact style from Store List.jpg) -->
+          <!-- Hero Graphic Banner (Gọn gàng, đã lược bỏ đoạn text giới thiệu dư thừa dài dòng) -->
           <div class="store-list-hero-card">
             <div class="sl-hero-illustration">
               <div class="sl-mascot-group">
@@ -450,9 +446,6 @@
                 </div>
               </div>
             </div>
-            <div class="sl-intro-text">
-              My Reward là tính năng giúp khách hàng đổi tem và nhận quà một cách minh bạch, chủ động và tiết kiệm thời gian. Tại đây, bạn có thể dễ dàng kiểm tra tình trạng quà tại từng cửa hàng và chủ động lên kế hoạch đổi quà phù hợp.
-            </div>
           </div>
 
           <!-- Segmented Toggle (Miền Nam | Miền Bắc) -->
@@ -465,9 +458,134 @@
             </button>
           </div>
 
-          <!-- Dynamic Container for Gift Items and Accordion Stores (Rendered matching Store List.jpg & Store List - Expand.jpg) -->
+          <!-- Dynamic Container for Gift Items and Accordion Stores (Chỉ hiển thị chương trình Tích Tem Đổi Quà, không hiển thị chương trình khác) -->
           <div class="store-gift-cards-container" id="storeGiftCardsContainer">
             <!-- Rendered by JS based on region selection -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: ĐIỀU KHOẢN & ĐIỀU KIỆN (T&C CHƯƠNG TRÌNH TÍCH TEM ĐỔI QUÀ) -->
+      <section id="stamp-terms-page" class="app-page">
+        <!-- Webview Nav Header -->
+        <div class="webview-header-nav stamp-terms-nav-header">
+          <button class="back-home-btn" id="backToStampFromTerms">
+            <i class="fa-solid fa-chevron-left"></i> Game Tem
+          </button>
+          <span class="wv-title">Điều Khoản & Thể Lệ</span>
+          <button class="icon-btn-sm" id="termsShareBtn" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+        </div>
+
+        <div class="webview-scroll-content stamp-terms-scroll-content">
+          <!-- Hero Header Card -->
+          <div class="terms-hero-card">
+            <div class="terms-hero-badge"><i class="fa-solid fa-award"></i> GS25 LOYALTY 2026</div>
+            <h3 class="terms-hero-title">ĐIỀU KHOẢN & ĐIỀU KIỆN<br>CHƯƠNG TRÌNH TÍCH TEM ĐỔI QUÀ</h3>
+            <p class="terms-hero-subtitle">Áp dụng cho toàn bộ thành viên GS25 trên hệ thống toàn quốc</p>
+          </div>
+
+          <!-- Section 1: Thời gian & Đối tượng áp dụng -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-regular fa-calendar-check"></i></div>
+              <h4>1. Thời gian & Đối tượng áp dụng</h4>
+            </div>
+            <div class="tsc-body">
+              <ul>
+                <li><strong>Thời gian chương trình:</strong> Bắt đầu từ 00:00 ngày đầu tháng đến 23:59 ngày cuối cùng mỗi tháng.</li>
+                <li><strong>Đối tượng tham gia:</strong> Toàn bộ khách hàng có tài khoản thành viên GS25 Loyalty App (Bao gồm các hạng: <em>Standard, Gold, Platinum</em>).</li>
+                <li><strong>Phạm vi:</strong> Toàn bộ hệ thống cửa hàng GS25 tại Miền Nam và Miền Bắc.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 2: Cách thức tích tem -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-stamp"></i></div>
+              <h4>2. Điều kiện & Cách thức tích tem</h4>
+            </div>
+            <div class="tsc-body">
+              <p>Khách hàng xuất trình mã thành viên (Member QR / Barcode) khi thanh toán tại quầy thu ngân GS25. Hệ thống sẽ tự động ghi nhận <strong>01 Tem</strong> khi thỏa mãn đồng thời 2 điều kiện:</p>
+              <div class="tsc-highlight-box">
+                <div class="th-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span><strong>Điều kiện 1:</strong> Hóa đơn mua hàng có tổng giá trị thanh toán thực tế từ <strong>100.000 VNĐ</strong> trở lên.</span>
+                </div>
+                <div class="th-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span><strong>Điều kiện 2:</strong> Trong giỏ hàng có ít nhất <strong>01 sản phẩm của Nhà tài trợ</strong> thuộc danh mục chiến dịch tháng.</span>
+                </div>
+              </div>
+              <p class="tsc-note">* Không giới hạn số lượng tem tích lũy trong suốt thời gian diễn ra chiến dịch.</p>
+            </div>
+          </div>
+
+          <!-- Section 3: Cơ chế đổi thưởng -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-gift"></i></div>
+              <h4>3. Cơ chế & Mốc đổi phần thưởng</h4>
+            </div>
+            <div class="tsc-body">
+              <ul>
+                <li><strong>Mốc đổi quà:</strong> Khi tích lũy đủ <strong>10 Tem</strong>, thành viên đủ điều kiện bấm nút <strong>"ĐỔI QUÀ"</strong> để nhận ngay <strong>01 Hộp Quà Happy Fridge</strong> độc quyền.</li>
+                <li><strong>Số lượng lượt đổi:</strong> Khách hàng có thể tiếp tục tích tem và đổi thêm nhiều phần quà sau khi hoàn thành mốc 10 tem.</li>
+                <li>Hệ thống tự động phát hành mã Coupon/Voucher đổi quà điện tử ngay khi thao tác đổi quà hoàn tất.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 4: Thời hạn sử dụng mã quà tặng (Quy định 30 ngày) -->
+          <div class="terms-section-card highlight-expiry-card">
+            <div class="tsc-header">
+              <div class="tsc-icon green"><i class="fa-regular fa-clock"></i></div>
+              <h4>4. Thời hạn sử dụng mã quà tặng</h4>
+            </div>
+            <div class="tsc-body">
+              <div class="expiry-callout-box">
+                <div class="ecb-title"><i class="fa-solid fa-hourglass-half"></i> HIỆU LỰC CODE QUÀ TẶNG: 30 NGÀY</div>
+                <p>Thời hạn sử dụng mã code đổi quà là <strong>30 ngày</strong> kể từ thời điểm thành viên bấm Đổi Quà thành công và quà tặng được lưu trữ vào mục <strong>"Tủ Lạnh 25" / "Quà Của Tôi"</strong> trên ứng dụng GS25.</p>
+              </div>
+              <p class="tsc-warning"><i class="fa-solid fa-triangle-exclamation"></i> Quá thời hạn 30 ngày, mã quà tặng sẽ tự động hết hạn và không thể gia hạn hoặc hoàn trả tem đã tích lũy.</p>
+            </div>
+          </div>
+
+          <!-- Section 5: Quy trình nhận quà tại cửa hàng -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-store"></i></div>
+              <h4>5. Địa điểm & Quy trình nhận quà tại cửa hàng</h4>
+            </div>
+            <div class="tsc-body">
+              <ol class="tsc-steps-list">
+                <li>Tra cứu danh sách cửa hàng đổi quà hợp lệ tại mục <strong>"Danh sách cửa hàng Đổi Hộp Quà Happy Fridge"</strong>.</li>
+                <li>Đến cửa hàng GS25 thuận tiện, mở mục <strong>Tủ Lạnh 25</strong> và xuất trình mã QR Hộp Quà cho nhân viên thu ngân.</li>
+                <li>Nhân viên scan mã thành công và trao trực tiếp Hộp Quà Happy Fridge cho thành viên.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Section 6: Các quy định chung -->
+          <div class="terms-section-card">
+            <div class="tsc-header">
+              <div class="tsc-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <h4>6. Quy định chung khác</h4>
+            </div>
+            <div class="tsc-body">
+              <ul>
+                <li>Phần quà không có giá trị quy đổi thành tiền mặt hoặc chuyển nhượng dưới bất kỳ hình thức nào.</li>
+                <li>GS25 có quyền từ chối trao thưởng nếu phát hiện hành vi gian lận điểm, tem hoặc can thiệp kỹ thuật trái phép.</li>
+                <li>Trong trường hợp xảy ra tranh chấp, quyết định cuối cùng thuộc về Ban Quản Trị GS25 Việt Nam theo đúng quy định pháp luật.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CTA Button to Return to Stamp Game -->
+          <div class="terms-bottom-action">
+            <button class="btn-terms-return" id="btnTermsReturn">
+              <i class="fa-solid fa-arrow-left"></i> Quay lại Trang Tích Tem
+            </button>
           </div>
         </div>
       </section>
@@ -1160,7 +1278,7 @@
         <p class="map-modal-address" id="mapModalAddress">240 Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, TP. Hồ Chí Minh</p>
         
         <div class="map-modal-meta-row">
-          <span class="map-stock-badge in-stock" id="mapModalStock"><i class="fa-solid fa-box"></i> Còn 100 cái</span>
+          <span class="map-stock-badge in-stock" id="mapModalStock"><i class="fa-solid fa-circle-check"></i> Điểm đổi quà chính thức</span>
           <span class="map-hours-badge"><i class="fa-regular fa-clock"></i> Mở cửa 24/7</span>
         </div>
 
